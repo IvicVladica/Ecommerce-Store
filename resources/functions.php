@@ -206,13 +206,42 @@ function login_user() {
         }
     }
 
+}
 
 
+function send_message() {
 
+    if(isset($_POST['submit'])){
 
+        $to         =   "address@gmail.com";
+        $from_name  =   $_POST['name'];
+        $subject    =   $_POST['subject'];
+        $email      =   $_POST['email'];
+        $message    =   $_POST['message'];
 
+        $headers = "From: {$from_name} {$email}";
+
+        ini_set("SMTP","smtp.gmail.com");
+        ini_set("smtp_port","25");
+
+        $result = mail($to, $subject, $message,$headers);
+        
+        if(!$result) {
+
+            echo "ERROR";
+        
+        } else {
+
+            echo "SENT";
+
+        }
+
+    }
 
 }
+
+
+
 
 
 
