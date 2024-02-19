@@ -4,7 +4,8 @@
 
 <?php
 
-$_SESSION['product_1'] = 1;
+echo $_SESSION['product_1'];
+// $_SESSION['product_1'] = 1;
 
 ?>
 
@@ -16,6 +17,8 @@ $_SESSION['product_1'] = 1;
 <!-- /.row --> 
 
 <div class="row">
+
+    <h4 class="text-center bg-danger"><?php display_message(); ?></h4>
 
       <h1>Checkout</h1>
 
