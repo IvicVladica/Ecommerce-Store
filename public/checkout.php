@@ -1,14 +1,16 @@
 <?php require_once("../resources/config.php"); ?>
-
+<?php require_once("cart.php"); ?>
 <?php include(TEMPLATE_FRONT . DS . "header.php") ?>
 
-<?php
+<?php 
 
-echo $_SESSION['product_1'];
-// $_SESSION['product_1'] = 1;
+    if(isset($_SESSION['product_1'])) {
+
+        echo $_SESSION['product_1'];
+
+    }
 
 ?>
-
 
     <!-- Page Content -->
     <div class="container">
@@ -34,13 +36,9 @@ echo $_SESSION['product_1'];
           </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>apple</td>
-                <td>$23</td>
-                <td>3</td>
-                <td>2</td>
-              
-            </tr>
+
+           <?php cart(); ?>
+
         </tbody>
     </table>
 </form>
