@@ -94,10 +94,10 @@ function cart() {
                         </td>
                  </tr>
 
-                 <input type="hidden" name="item_name_{$item_name}" value="hat"> 
-                 <input type="hidden" name="item_number_$item_number" value="123">
-                 <input type="hidden" name="amount_$item_ammount" value="15.00">
-                 <input type="hidden" name="quantity_$quantity" value="15.00">
+                 <input type="hidden" name="item_name_{$item_name}" value="{$row['product_title']}"> 
+                 <input type="hidden" name="item_number_$item_number" value="{$row['product_id']}">
+                 <input type="hidden" name="amount_$item_ammount" value="{$row['product_price']}">
+                 <input type="hidden" name="quantity_$quantity" value="{$value}">
         
                 DELIMETER; 
         
