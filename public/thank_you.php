@@ -16,6 +16,8 @@ if(isset($_GET['tx'])) {
 
     confirm($query);
 
+    session_destroy();
+
 
 } else {
      
