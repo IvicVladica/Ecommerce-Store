@@ -62,78 +62,47 @@
                 </li>
             </ul>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> View Products</a>
-                    </li>
-                    <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Add Product</a>
-                    </li>
-                    
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Categories</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i>Orders</a>
-                    </li>
-                
-                </ul>
-            </div>
+            
             <!-- /.navbar-collapse -->
         </nav>
-
-
 
         <div id="page-wrapper">
 
             <div class="container-fluid">
 
+             <div class="row">
 
-                
-
-
-        <div class="col-md-12">
-<div class="row">
 <h1 class="page-header">
-   All Orders
+   All Products
 
 </h1>
-</div>
-
-<div class="row">
 <table class="table table-hover">
+
+
     <thead>
 
       <tr>
-           <th>S.N</th>
+           <th>Id</th>
            <th>Title</th>
-           <th>Photo</th>
-           <th>Quantity</th>
-           <th>Invoice Number</th>
-           <th>Order Date</th>
-           <th>Status</th>
+           <th>Category</th>
+           <th>Price</th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>21</td>
-            <td>Nikon 234</td>
 
-            <td><img src="http://placehold.it/62x62" alt=""></td>
-            <td>Cameras</td>
-            <td>456464</td>
-            <td>Jun 2039</td>
-           <td>Completed</td>
+      <tr>
+            <td>20</td>
+            <td>Nikon 234 <br>
+              <img src="http://placehold.it/62x62" alt="">
+            </td>
+            <td>Category</td>
+            <td>123</td>
         </tr>
-        
+      
 
-    </tbody>
+
+  </tbody>
 </table>
-</div>
 
 
 
@@ -144,12 +113,24 @@
 
 
 
+
+                
+                 
+
+
+             </div>
 
             </div>
             <!-- /.container-fluid -->
 
         </div>
         <!-- /#page-wrapper -->
+
+
+
+
+
+
 
     </div>
     <!-- /#wrapper -->
