@@ -1,5 +1,4 @@
 <?php require_once("../resources/config.php"); ?>
-<?php require_once("cart.php"); ?>
 <?php include(TEMPLATE_FRONT . DS . "header.php") ?>
 
 <?php
@@ -16,7 +15,8 @@ if(isset($_GET['tx'])) {
 
     confirm($query);
 
-    session_destroy();
+    report();
+
 
 
 } else {
