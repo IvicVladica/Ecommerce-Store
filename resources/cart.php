@@ -140,7 +140,7 @@ function show_paypal() {
     
 }
 
-function report() {
+function process_transaction() {
 
     global $connection;
 
