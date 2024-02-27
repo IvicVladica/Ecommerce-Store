@@ -334,8 +334,8 @@ function add_product() {
         $query = query("INSERT INTO products (product_title, product_category_id, product_price, product_quantity, product_description, product_short_desc, product_image)
         VALUES ('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_quantity}', '{$product_description}', '{$product_short_desc}', '{$product_image}')");
 
-        confirm($query);
         $last_id = last_id();
+        confirm($query);
         set_message("New product with id {$last_id} successfuly added");
         redirect("index.php?products");
 
