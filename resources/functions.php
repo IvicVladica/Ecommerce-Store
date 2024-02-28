@@ -396,4 +396,39 @@ function show_categories_add_product_page() {
     
     }
 
+    /******************************* Updating Products in Admin ****************************************/
+
+    function update_product() {
+
+        if(isset($_POST['update'])) {
+    
+            $product_title          = escape_string($_POST['product_title']);
+            $product_category_id    = escape_string($_POST['product_category_id']);
+            $product_price          = escape_string($_POST['product_price']);
+            $product_quantity       = escape_string($_POST['product_quantity']);
+            $product_description    = escape_string($_POST['product_description']);
+            $product_short_desc     = escape_string($_POST['product_short_desc']);
+            $product_image          = escape_string($_FILES['file']['name']);
+            $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+    
+            move_uploaded_file($image_temp_location , UPLOAD_DIRECTORY . DS . $product_image);
+    
+            $query = "UPDATE products SET ";
+            $query .= "product_title = '{$product_title }', ";
+            $query .= "product_category_id = '{$product_category_id }', ";
+            $query .= "product_price = '{$product_price }', ";
+            $query .= "product_quantity = '{$product_quantity }', ";
+            $query .= "product_description = '{$product_description }', ";
+            $query .= "product_short_desc = '{$product_short_desc }', ";
+            $query .= "product_image = '{$product_image }' ";
+            $query .= "WHERE product_id = " . escape_string($_GET['id']);
+
+            confirm($query);
+            set_message("Product has been successfuly updated");
+            redirect("index.php?products");
+    
+    }
+    
+    }
+
 ?>  
