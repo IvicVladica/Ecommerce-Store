@@ -1,5 +1,7 @@
 <?php
 
+$upload_directory = "uploads";
+
 // helper functions
 
 function last_id() {
@@ -83,11 +85,13 @@ function get_products() {
 
     while($row = fetch_array($query)) {
 
+        $product_image = display_image($row['product_image']);
+
     $product = <<<DELIMETER
 
     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
+                            <a href="item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#36;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -138,16 +142,18 @@ function get_products_in_cat_page() {
 
     while($row = fetch_array($query)) {
 
+        $product_image = display_image($row['product_image']);
+
     $product = <<<DELIMETER
 
             <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-                <img src="{$row['product_image']}" alt="">
+                <img src="../resources/{$product_image}" alt="">
                 <div class="caption">
                     <h3>{$row['product_title']}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                     </p>
                 </div>
             </div>
@@ -169,16 +175,18 @@ function get_products_in_shop_page() {
 
     while($row = fetch_array($query)) {
 
+        $product_image = display_image($row['product_image']);
+
     $product = <<<DELIMETER
 
             <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-                <img src="{$row['product_image']}" alt="">
+                <img src="../resources/{$product_image}" alt="">
                 <div class="caption">
                     <h3>{$row['product_title']}</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                     <p>
-                        <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                     </p>
                 </div>
             </div>
@@ -285,6 +293,14 @@ function display_orders() {
 
 /******************************* Admin Products ****************************************/
 
+function display_image($picture) {
+
+    global $upload_directory;
+
+    return $upload_directory . DS . $picture;
+
+}
+
 
 function get_products_in_admin() {
 
@@ -295,12 +311,14 @@ function get_products_in_admin() {
 
     $product_category_title = show_product_category($row['product_category_id']);
 
+    $product_image = display_image($row['product_image']);
+
     $product = <<<DELIMETER
 
         <tr>
             <td>{$row['product_id']}</td>
             <td>{$row['product_title']}<br>
-                <a href="index.php?edit_product&id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
+                <a href="index.php?edit_product&id={$row['product_id']}"><img WIDTH="100" src="../../resources/{$product_image}" alt=""></a>
             </td>
             <td>{$product_category_title}</td>
             <td>{$row['product_price']}</td>
@@ -345,7 +363,7 @@ function add_product() {
         $product_image          = escape_string($_FILES['file']['name']);
         $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
 
-        move_uploaded_file($image_temp_location, UPLOAD_DIRECTORY . DS . $product_image);
+        move_uploaded_file($image_temp_location , UPLOAD_DIRECTORY . DS . $product_image);
 
         $query = query("INSERT INTO products (product_title, product_category_id, product_price, product_quantity, product_description, product_short_desc, product_image)
         VALUES ('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_quantity}', '{$product_description}', '{$product_short_desc}', '{$product_image}')");
