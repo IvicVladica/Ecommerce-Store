@@ -88,9 +88,9 @@ if(isset($_GET['id'])) {
      <!-- Product Categories-->
 
     <div class="form-group">
-         <label for="product-category">Product Category</label>
+         <label for="product-title">Product Category</label>
         <select name="product_category_id" id="" class="form-control">
-            <option value="">Select Category</option>
+            <option value="<?php echo $product_category_id; ?>"><?php echo show_product_category($product_category_id) ?></option>
 
             <?php show_categories_add_product_page(); ?>
 

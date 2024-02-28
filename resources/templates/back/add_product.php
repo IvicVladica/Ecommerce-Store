@@ -96,7 +96,7 @@
     <!-- Product Image -->
     <div class="form-group">
         <label for="product-image">Product Image</label>
-        <input type="file" name="file">
+        <input type="file" name="name">
     </div>
 
 
