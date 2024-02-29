@@ -463,6 +463,7 @@ function show_categories_add_product_page() {
     <tr>
         <td>{$cat_id}</td>
         <td>{$cat_title}</td>
+        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['cat_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
     </tr>
 
     DELIMETER;
@@ -470,6 +471,28 @@ function show_categories_add_product_page() {
     echo $category;
 
     }
+
+ }
+
+ function add_category() {
+
+    if(isset($_POST['add_category'])) {
+
+        $cat_title = escape_string($_POST['cat_title']);
+
+        if(empty($cat_title) || $cat_title == " ") {
+
+            set_message("This field cannot be empty");
+
+        } else {
+
+        $insert_cat = query("INSERT INTO categories (cat_title) VALUES ('{$cat_title}') ");
+        confirm($insert_cat);
+        set_message("Category created");
+
+        }
+
+    } 
 
  }
 
