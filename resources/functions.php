@@ -364,7 +364,7 @@ function add_product() {
         $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
 
         move_uploaded_file($image_temp_location , UPLOAD_DIRECTORY . DS . $product_image);
-   
+
         $query = query("INSERT INTO products (product_title, product_category_id, product_price, product_quantity, product_description, product_short_desc, product_image)
         VALUES ('{$product_title}', '{$product_category_id}', '{$product_price}', '{$product_quantity}', '{$product_description}', '{$product_short_desc}', '{$product_image}')");
 
@@ -443,6 +443,34 @@ function show_categories_add_product_page() {
     
     }
     
+}
+
+ /******************************* Categories in Admin ****************************************/
+
+ function show_categories_in_admin() {
+
+    $query = "SELECT * FROM categories";
+    $category_query = query($query);
+    confirm($category_query);
+
+    while($row = fetch_array($category_query)) {
+
+        $cat_id     = $row['cat_id'];
+        $cat_title  = $row['cat_title'];
+
+    $category = <<<DELIMETER
+
+    <tr>
+        <td>{$cat_id}</td>
+        <td>{$cat_title}</td>
+    </tr>
+
+    DELIMETER;
+
+    echo $category;
+
     }
+
+ }
 
 ?>  
