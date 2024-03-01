@@ -360,8 +360,8 @@ function add_product() {
         $product_quantity       = escape_string($_POST['product_quantity']);
         $product_description    = escape_string($_POST['product_description']);
         $product_short_desc     = escape_string($_POST['product_short_desc']);
-        $product_image          = escape_string($_FILES['file']['name']);
-        $image_temp_location    = escape_string($_FILES['file']['tmp_name']);
+        $product_image          = $_FILES['file']['name'];
+        $image_temp_location    = $_FILES['file']['tmp_name'];
 
         move_uploaded_file($image_temp_location , UPLOAD_DIRECTORY . DS . $product_image);
 
@@ -527,11 +527,29 @@ function show_categories_add_product_page() {
 
     }
 
-
-
-
-
-
   }
+
+  function add_user() {
+
+    if(isset($_POST['add_user'])) {
+
+        $username    = escape_string($_POST['username']);
+        $email       = escape_string($_POST['email']);
+        $password    = escape_string($_POST['password']);
+        // $user_photo  = $_POST['file']['name'];
+        // $photo_tmp   = $_POST['file']['name'];
+
+        // move_uploaded_file($photo_tmp, UPLOAD_DIRECTORY . DS . $user_photo);
+
+        $insert_user = query("INSERT INTO users (username, email, password) VALUES ('{$username}', '{$email}', '{$password}') ");
+        confirm($insert_user);
+        set_message("User created");
+
+        redirect("index.php?users");
+
+        }
+
+    } 
+
 
 ?>  
