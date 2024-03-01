@@ -496,4 +496,42 @@ function show_categories_add_product_page() {
 
  }
 
+  /******************************* Users in Admin ****************************************/
+
+  function display_users() {
+
+    $query = "SELECT * FROM users";
+    $users_query = query($query);
+    confirm($users_query);
+
+    while($row = fetch_array($users_query)) {
+
+        $user_id     = $row['user_id'];
+        $username  = $row['username'];
+        $email  = $row['email'];
+        $password  = $row['password'];
+
+    $user = <<<DELIMETER
+
+    <tr>
+        <td>{$user_id}</td>
+        <td>{$username}</td>
+        <td>{$email}</td>
+        <td>{$password}</td>
+        <td><a class="btn btn-danger" href="../../resources/templates/back/delete_user.php?id={$row['user_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+    </tr>
+
+    DELIMETER;
+
+    echo $user;
+
+    }
+
+
+
+
+
+
+  }
+
 ?>  
