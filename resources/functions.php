@@ -80,7 +80,7 @@ function fetch_array($result) {
 
 function get_products() {
 
-    $query = query(" SELECT * FROM products");
+    $query = query(" SELECT * FROM products WHERE product_quantity >=1 ");
     confirm($query);
 
     while($row = fetch_array($query)) {
@@ -137,7 +137,7 @@ echo $category_links;
 
 function get_products_in_cat_page() {
 
-    $query = query(" SELECT * FROM products WHERE product_category_id = " . escape_string($_GET['id']). "");
+    $query = query(" SELECT * FROM products WHERE product_category_id = " . escape_string($_GET['id']). " AND product_quantity>=1 ");
     confirm($query);
 
     while($row = fetch_array($query)) {
@@ -170,7 +170,7 @@ function get_products_in_cat_page() {
 
 function get_products_in_shop_page() {
 
-    $query = query(" SELECT * FROM products");
+    $query = query(" SELECT * FROM products WHERE product_quantity >=1 ");
     confirm($query);
 
     while($row = fetch_array($query)) {
