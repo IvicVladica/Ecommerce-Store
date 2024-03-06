@@ -80,6 +80,12 @@ if(!isset($_SESSION['username'])) {
                     include(TEMPLATE_BACK . "/reports.php");
                     
                 }
+
+                if(isset($_GET['slides'])) {
+
+                    include(TEMPLATE_BACK . "/slides.php");
+                    
+                }
         
 
                 ?>
