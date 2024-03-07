@@ -596,7 +596,8 @@ function show_categories_add_product_page() {
 
             if(empty($slide_title) || empty($slide_image)) {
 
-                echo "<p class='bg-danger'>This field cannot be empty</p>";
+                set_message("Fields cannot be empty");
+                redirect("index.php?slides");
 
             } else {
 
@@ -608,18 +609,32 @@ function show_categories_add_product_page() {
 
                 redirect("index.php?slides");
 
-
             }
 
         }
 
      }
 
-     function get_current_slide() {
+     function get_current_slide_in_admin() {
+
+        $query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
+        confirm($query);
+
+        while($row = fetch_array($query)) {
+
+            $slide_image = display_image($row['slide_image']);
+            $slide_active_admin = <<<DELIMETER
+    
+            
+                <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+            
         
+        DELIMETER;
 
-
-
+        echo $slide_active_admin;
+  
+        }
+        
      }
 
      function get_active_slide() {
@@ -668,7 +683,30 @@ function show_categories_add_product_page() {
 
      function get_slides_thumbnail() {
 
+        $query = query("SELECT * FROM slides ORDER BY slide_id ASC ");
+        confirm($query);
 
+        while($row = fetch_array($query)) {
+
+            $slide_image = display_image($row['slide_image']);
+            $slide_thumb_admin = <<<DELIMETER
+    
+            <div class="col-xs-6 col-md-3">
+
+            <a href="">
+        
+              <img class="slide-image" width="100" src="../../resources/{$slide_image}" alt="">
+        
+            </a>
+        
+        
+          </div>
+            
+        DELIMETER;
+
+        echo $slide_thumb_admin;
+  
+        }
 
      }
 
