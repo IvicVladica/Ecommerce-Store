@@ -689,16 +689,22 @@ function show_categories_add_product_page() {
         while($row = fetch_array($query)) {
 
             $slide_image = display_image($row['slide_image']);
+
             $slide_thumb_admin = <<<DELIMETER
     
-            <div class="col-xs-6 col-md-3">
+            <div class="col-xs-6 col-md-3 image_container">
 
-            <a href="">
+            <a href="index.php?delete_slide_id={$row['slide_id']}">
         
-              <img class="slide-image" width="100" src="../../resources/{$slide_image}" alt="">
+              <img class="img-responsive slide-image" src="../../resources/{$slide_image}" alt="">
         
             </a>
-        
+
+            <div class="caption">
+
+            <p>{$row['slide_title']}</p>
+            
+            </div>
         
           </div>
             
