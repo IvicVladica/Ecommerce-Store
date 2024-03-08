@@ -91,7 +91,7 @@ function get_products() {
 
     <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                            <a href="item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a>
+                            <a href="item.php?id={$row['product_id']}"><img style="height:150px" src="../resources/{$product_image}" alt=""></a>
                             <div class="caption">
                                 <h4 class="pull-right">&#36;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -648,7 +648,7 @@ function show_categories_add_product_page() {
             $slide_active = <<<DELIMETER
     
             <div class="item active">
-                <img class="slide-image" src="../resources/{$slide_image}" alt="">
+                <img style="height:450px" class="slide-image" src="../resources/{$slide_image}" alt="">
             </div>
         
         DELIMETER;
@@ -670,7 +670,7 @@ function show_categories_add_product_page() {
             $slides = <<<DELIMETER
     
             <div class="item">
-                <img class="slide-image" src="../resources/{$slide_image}" alt="">
+                <img style="height:450px" class="slide-image" src="../resources/{$slide_image}" alt="">
             </div>
         
         DELIMETER;
@@ -696,7 +696,7 @@ function show_categories_add_product_page() {
 
             <a href="index.php?delete_slide_id={$row['slide_id']}">
         
-              <img class="img-responsive slide-image" src="../../resources/{$slide_image}" alt="">
+              <img style="height:150px" class="img-responsive slide-image" src="../../resources/{$slide_image}" alt="">
         
             </a>
 
