@@ -76,9 +76,16 @@ function fetch_array($result) {
 
 /********************************** FRONT END FUNCTIONS ****************************************/
 
+function count_all_records($table) {
+
+    return mysqli_num_rows(query(" SELECT * FROM ".$table));
+
+}
+
+
 // get products
 
-function get_products() {
+function get_products($perPage = "6") {
 
     $query = query(" SELECT * FROM products WHERE product_quantity >=1 ");
     confirm($query);
@@ -95,7 +102,6 @@ function get_products() {
 
     }
 
-    $perPage = 6;
     $lastPage = ceil($rows / $perPage);
 
     if($page < 1) {
@@ -117,7 +123,6 @@ function get_products() {
     if ($page == 1) {
 
         $middleNumbers .= '<li class="page-item active"><a>'.$page.'</a></li>';
-
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">'.$add1.'</a></li>';
 
@@ -125,22 +130,17 @@ function get_products() {
 
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">'.$sub1.'</a></li>';
-
         $middleNumbers .= '<li class="page-item active"><a>'.$page.'</a></li>';
 
     } elseif ($page > 2 && $page < ($lastPage-1)) {
 
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$sub2.'">'.$sub2.'</a></li>';
-
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">'.$sub1.'</a></li>';
-
          $middleNumbers .= '<li class="page-item active"><a>'.$page.'</a></li>';
-
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">'.$add1.'</a></li>';
-
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$add2.'">'.$add2.'</a></li>';
 
@@ -149,17 +149,10 @@ function get_products() {
 
         $middleNumbers .= '<li class="page-item"><a class="page-link"
          href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">'.$sub1.'</a></li>';
-
          $middleNumbers .= '<li class="page-item active"><a>'.$page.'</a></li>';
-
         $middleNumbers .= '<li class="page-item"><a class="page-link"
           href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">'.$add1.'</a></li>';
  
-        $middleNumbers .= '<li class="page-item"><a class="page-link"
-          href="'.$_SERVER['PHP_SELF'].'?page='.$add2.'">'.$add2.'</a></li>';   
-
-            //  ovaj zadnji add2 dodaje jos jednu stranu i kad ona ne postoji! Proveriti
-
     }
 
     $limit = 'LIMIT ' . ($page - 1) * $perPage . ',' . $perPage;
@@ -172,7 +165,6 @@ function get_products() {
     if ($page != 1) {
 
         $prev = $page - 1;
-
         $outputPagination .= '<li class="page-item"><a class="page-link"
         href="'.$_SERVER['PHP_SELF'].'?page='.$prev.'">Back</a></li>';
 
@@ -183,12 +175,10 @@ function get_products() {
     if ($page != $lastPage) {
 
         $next = $page + 1;
-
         $outputPagination .= '<li class="page-item"><a class="page-link"
         href="'.$_SERVER['PHP_SELF'].'?page='.$next.'">Next</a></li>';
 
     }
-
 
 
     while($row = fetch_array($query2)) {
@@ -205,8 +195,8 @@ function get_products() {
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                                 </h4>
                                 <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                                <a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['product_id']}">Add to cart</a>
-                    
+                                <p class="text-center"><a class="btn btn-primary" target="_blank" href="../resources/cart.php?add={$row['product_id']}">Add to cart</a>
+                                <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a></p>
                             </div>
                             
                         </div>
@@ -218,7 +208,7 @@ function get_products() {
 
     }
 
-    echo "<div class='text-center'><ul class='pagination'> $outputPagination </ul></div>";
+    echo "<div class='text-center' style='clear: both'><ul class='pagination'> $outputPagination </ul></div>";
 
 }
 
@@ -285,17 +275,19 @@ function get_products_in_shop_page() {
     while($row = fetch_array($query)) {
 
         $product_image = display_image($row['product_image']);
+        $product_description = $row['product_description'];
 
     $product = <<<DELIMETER
 
             <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-                <img src="../resources/{$product_image}" alt="">
+                <img img style="height:150px" src="../resources/{$product_image}" alt="">
                 <div class="caption">
                     <h3>{$row['product_title']}</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p>$product_description</p>
                     <p>
-                        <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> 
+                        <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                     </p>
                 </div>
             </div>
